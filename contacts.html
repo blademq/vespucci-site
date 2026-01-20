@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты - Научись и не ошибись</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* Специальные стили для страницы контактов */
+        
+        /* Контакты информация */
+        .contacts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .contact-card {
+            background: rgba(40, 40, 40, 0.6);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(74, 158, 255, 0.2);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, #4a9eff, #2a7aff);
+        }
+        
+        .contact-icon {
+            font-size: 3rem;
+            color: #4a9eff;
+            margin-bottom: 20px;
+        }
+        
+        .contact-details {
+            margin: 25px 0;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 15px 0;
+            color: #ddd;
+        }
+        
+        .contact-item.highlight {
+            font-size: 1.3rem;
+            color: #4a9eff;
+        }
+        
+        .phone-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #4a9eff, #8bc6ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 10px 0;
+        }
+        
+        .contact-note {
+            color: #888;
+            font-size: 0.9rem;
+            margin-top: 15px;
+        }
+        
+        /* Форма обратной связи */
+        .contact-form-section {
+            background: rgba(30, 30, 30, 0.8);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 60px 0;
+            border: 1px solid rgba(74, 158, 255, 0.2);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        }
+        
+        .form-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .form-header-icon {
+            font-size: 3.5rem;
+            color: #4a9eff;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 10px rgba(74, 158, 255, 0.3));
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 10px;
+            color: #ddd;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .form-label i {
+            color: #4a9eff;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 1rem;
+            font-family: 'Roboto', sans-serif;
+            transition: all 0.3s;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #4a9eff;
+            background: rgba(74, 158, 255, 0.05);
+            box-shadow: 0 0 0 3px rgba(74, 158, 255, 0.1);
+        }
+        
+        .form-textarea {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 1rem;
+            font-family: 'Roboto', sans-serif;
+            min-height: 150px;
+            resize: vertical;
+            transition: all 0.3s;
+        }
+        
+        .form-textarea:focus {
+            outline: none;
+            border-color: #4a9eff;
+            background: rgba(74, 158, 255, 0.05);
+            box-shadow: 0 0 0 3px rgba(74, 158, 255, 0.1);
+        }
+        
+        .form-select {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .form-select:focus {
+            outline: none;
+            border-color: #4a9eff;
+            background: rgba(74, 158, 255, 0.05);
+            box-shadow: 0 0 0 3px rgba(74, 158, 255, 0.1);
+        }
+        
+        .form-select option {
+            background: #2d2d2d;
+            color: #fff;
+        }
+        
+        .form-footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .submit-btn {
+            padding: 16px 50px;
+            background: linear-gradient(135deg, #4a9eff, #2a7aff);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(74, 158, 255, 0.3);
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(74, 158, 255, 0.4);
+            background: linear-gradient(135deg, #5aa9ff, #3a8aff);
+        }
+        
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        
+        /* Сообщения формы */
+        .form-message {
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            display: none;
+        }
+        
+        .form-success {
+            background: rgba(40, 167, 69, 0.15);
+            border: 1px solid rgba(40, 167, 69, 0.3);
+            color: #34ce57;
+        }
+        
+        .form-error {
+            background: rgba(220, 53, 69, 0.15);
+            border: 1px solid rgba(220, 53, 69, 0.3);
+            color: #e4606d;
+        }
+        
+        .telegram-info {
+            background: rgba(0, 136, 204, 0.1);
+            border: 1px solid rgba(0, 136, 204, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 25px 0;
+            text-align: center;
+        }
+        
+        .telegram-info i {
+            color: #0088cc;
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+        
+        /* Призыв к действию */
+        .cta-section {
+            background: linear-gradient(135deg, rgba(74, 158, 255, 0.1), rgba(42, 122, 255, 0.05));
+            border-radius: 20px;
+            padding: 50px;
+            margin: 60px 0;
+            text-align: center;
+            border: 1px solid rgba(74, 158, 255, 0.2);
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .cta-button {
+            padding: 20px 40px;
+            border-radius: 15px;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s;
+            min-width: 250px;
+            justify-content: center;
+        }
+        
+        .cta-button-primary {
+            background: linear-gradient(135deg, #4a9eff, #2a7aff);
+            color: white;
+            box-shadow: 0 5px 20px rgba(42, 122, 255, 0.3);
+        }
+        
+        .cta-button-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(42, 122, 255, 0.4);
+        }
+        
+        .cta-button-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .cta-button-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+        }
+        
+        /* Анимации */
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-slide-in {
+            animation: slideIn 0.6s ease-out;
+        }
+        
+        /* Мобильная адаптация */
+        @media (max-width: 992px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .cta-button {
+                width: 100%;
+                max-width: 400px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .contact-form-section {
+                padding: 30px 20px;
+            }
+            
+            .form-header h2 {
+                font-size: 1.8rem;
+            }
+            
+            .contact-card {
+                padding: 25px 20px;
+            }
+            
+            .phone-number {
+                font-size: 1.5rem;
+            }
+            
+            .cta-section {
+                padding: 40px 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .contact-icon {
+                font-size: 2.5rem;
+            }
+            
+            .submit-btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .cta-button {
+                min-width: 100%;
+                padding: 18px 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="snow-canvas"></canvas>
+    <canvas id="mouse-trail"></canvas>
+    
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-scale-balanced"></i>
+                <h1>Научись и не ошибись</h1>
+            </div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Главная</a>
+                <a href="videos.html" class="nav-link"><i class="fas fa-video"></i> Обучающие видео</a>
+                <a href="memo.html" class="nav-link"><i class="fas fa-file-alt"></i> Памятка</a>
+                <a href="contacts.html" class="nav-link active"><i class="fas fa-address-book"></i> Контакты</a>
+                <a href="family.html" class="nav-link"><i class="fas fa-users"></i> VESPUCCI FAMQ</a>
+            </nav>
+            <button class="menu-toggle" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </header>
+
+        <main class="main-content">
+            <section class="page-header">
+                <h1><i class="fas fa-address-book"></i> Наши контакты</h1>
+                <p class="page-subtitle">Свяжитесь с нами по любым вопросам, предложениям или для сообщения об ошибках</p>
+            </section>
+
+            <!-- Контактная информация -->
+            <section class="contacts-content animate-slide-in">
+                <div class="contacts-intro">
+                    <p style="font-size: 1.1rem; line-height: 1.7; color: #ccc; text-align: center; max-width: 900px; margin: 0 auto 40px;">
+                        Если у вас есть вопросы, предложения или вы обнаружили ошибку на сайте — пожалуйста, свяжитесь с нами. 
+                        Мы всегда открыты к обратной связи и оперативно отвечаем на все сообщения.
+                    </p>
+                </div>
+                
+                <div class="contacts-grid">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fab fa-discord"></i>
+                        </div>
+                        <h3 style="color: #fff; margin-bottom: 20px;">Дискорды владельцев</h3>
+                        <div class="contact-details">
+                            <div class="contact-item">
+                                <i class="fas fa-user"></i>
+                                <span style="color: #8bc6ff; font-weight: 500;">blademqw</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-user"></i>
+                                <span style="color: #8bc6ff; font-weight: 500;">gargamel_volandemortov</span>
+                            </div>
+                        </div>
+                        <p class="contact-note">Добавьте нас в друзья для прямого общения</p>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <h3 style="color: #fff; margin-bottom: 20px;">Телефон для связи</h3>
+                        <div class="contact-details">
+                            <div class="contact-item highlight">
+                                <i class="fas fa-phone-volume"></i>
+                                <div class="phone-number">4189451</div>
+                            </div>
+                        </div>
+                        <p class="contact-note">Звоните в рабочее время для оперативной помощи</p>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h3 style="color: #fff; margin-bottom: 20px;">Наша локация</h3>
+                        <div class="contact-details">
+                            <div class="contact-item">
+                                <i class="fas fa-city"></i>
+                                <span>Лос-Сантос</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-road"></i>
+                                <span>Бёртон Эйб-Милтон-Парквэй</span>
+                            </div>
+                        </div>
+                        <p class="contact-note">Рабочий офис и место для личных встреч</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Форма обратной связи -->
+            <section class="contact-form-section animate-slide-in">
+                <div class="form-header">
+                    <div class="form-header-icon">
+                        <i class="fab fa-telegram"></i>
+                    </div>
+                    <h2 style="color: #fff; margin-bottom: 15px;">Отправьте нам сообщение</h2>
+                    <p style="color: #aaa; max-width: 700px; margin: 0 auto; line-height: 1.6;">
+                        Заполните форму ниже, и ваше сообщение будет мгновенно отправлено в наш Telegram-бот. 
+                        Мы ответим вам в кратчайшие сроки!
+                    </p>
+                </div>
+                
+                <div class="telegram-info">
+                    <p style="margin: 0; color: #8bc6ff;">
+                        <i class="fab fa-telegram"></i>
+                        <strong>Сообщения отправляются напрямую в Telegram</strong> — быстрая и надежная связь
+                    </p>
+                </div>
+                
+                <!-- Сообщения формы -->
+                <div class="form-message" id="form-success">
+                    <i class="fas fa-check-circle" style="font-size: 2rem; margin-bottom: 15px; display: block;"></i>
+                    <h3 style="margin-bottom: 10px;">Сообщение успешно отправлено!</h3>
+                    <p style="margin: 0;">Мы получили ваше сообщение и свяжемся с вами в ближайшее время.</p>
+                </div>
+                
+                <div class="form-message" id="form-error">
+                    <i class="fas fa-exclamation-triangle" style="font-size: 2rem; margin-bottom: 15px; display: block;"></i>
+                    <h3 style="margin-bottom: 10px;">Ошибка отправки</h3>
+                    <p style="margin: 0;" id="error-text">Пожалуйста, попробуйте еще раз или свяжитесь с нами другим способом.</p>
+                </div>
+                
+                <!-- Форма -->
+                <form id="contact-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="name" class="form-label">
+                                <i class="fas fa-user"></i> Ваше имя:
+                            </label>
+                            <input type="text" id="name" class="form-input" placeholder="Введите ваше имя" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contact" class="form-label">
+                                <i class="fas fa-address-card"></i> Контакт для связи:
+                            </label>
+                            <input type="text" id="contact" class="form-input" 
+                                   placeholder="Discord, телефон, email или Telegram" 
+                                   required>
+                        </div>
+                        
+                        <div class="form-group full-width">
+                            <label for="subject" class="form-label">
+                                <i class="fas fa-tag"></i> Тема сообщения:
+                            </label>
+                            <select id="subject" class="form-select" required>
+                                <option value="" disabled selected>Выберите тему</option>
+                                <option value="Вопрос по сайту">Вопрос по сайту</option>
+                                <option value="Предложение по улучшению">Предложение по улучшению</option>
+                                <option value="Сообщение об ошибке">Сообщение об ошибке</option>
+                                <option value="Вопрос по памятке">Вопрос по памятке</option>
+                                <option value="Другое">Другое</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group full-width">
+                            <label for="message" class="form-label">
+                                <i class="fas fa-comment"></i> Сообщение:
+                            </label>
+                            <textarea id="message" class="form-textarea" 
+                                      placeholder="Опишите ваш вопрос или предложение подробно..." 
+                                      required></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="form-footer">
+                        <button type="submit" class="submit-btn" id="submit-btn">
+                            <i class="fab fa-telegram"></i> Отправить в Telegram
+                        </button>
+                        <p style="color: #888; margin-top: 20px; font-size: 0.9rem;">
+                            <i class="fas fa-shield-alt"></i> Ваши данные защищены и не будут переданы третьим лицам
+                        </p>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Призыв к действию -->
+            <section class="cta-section animate-slide-in">
+                <h2 style="color: #fff; margin-bottom: 20px; font-size: 2rem;">
+                    <i class="fas fa-comment-dots"></i> Свяжитесь с нами сегодня
+                </h2>
+                <p style="color: #ccc; max-width: 800px; margin: 0 auto 30px; line-height: 1.7; font-size: 1.1rem;">
+                    Мы готовы помочь вам разобраться в сложных вопросах, предоставить дополнительную информацию 
+                    или принять ваши предложения по улучшению ресурса. Выберите удобный способ связи:
+                </p>
+                
+                <div class="cta-buttons">
+                    <div class="cta-button cta-button-secondary">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4 style="margin: 0 0 5px 0;">ЖДЁМ ВАШЕГО ЗВОНКА</h4>
+                            <p style="margin: 0; font-size: 0.9rem; opacity: 0.9;">Позвоните нам по номеру 4189451</p>
+                        </div>
+                    </div>
+                    
+                    <div class="cta-button cta-button-secondary">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4 style="margin: 0 0 5px 0;">ЖДЁМ ВАШЕГО СООБЩЕНИЯ</h4>
+                            <p style="margin: 0; font-size: 0.9rem; opacity: 0.9;">Напишите нам через форму выше</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>© 2026 Научись и не ошибись. Все права защищены.</p>
+            <p>Информационный ресурс по юридическим вопросам</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-discord"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fas fa-envelope"></i></a>
+            </div>
+        </footer>
+    </div>
+
+    <script src="js/effects.js"></script>
+    <script>
+        // Мобильное меню
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            document.querySelector('.nav').classList.toggle('show');
+        });
+        
+        // Настройки Telegram бота
+        const TELEGRAM_BOT_TOKEN = '8402821027:AAEZQLOqFRIcoUsMDmzaEuJzENACrjSaSQ0'; // Замените на реальный токен
+        const TELEGRAM_CHAT_ID = '1675531783'; // Замените на реальный Chat ID
+        
+        // Элементы формы
+        const contactForm = document.getElementById('contact-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const formSuccess = document.getElementById('form-success');
+        const formError = document.getElementById('form-error');
+        const errorText = document.getElementById('error-text');
+        
+        // Функция для отправки сообщения в Telegram
+        async function sendToTelegram(formData) {
+            try {
+                // Форматируем сообщение для Telegram
+                const message = `
+📨 *НОВОЕ СООБЩЕНИЕ С САЙТА*
+                
+👤 *Имя:* ${formData.name}
+📞 *Контакт:* ${formData.contact}
+🏷️ *Тема:* ${formData.subject}
+📝 *Сообщение:*
+${formData.message}
+                
+⏰ *Время отправки:* ${new Date().toLocaleString('ru-RU')}
+                `;
+                
+                // Отправляем сообщение в Telegram
+                const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: TELEGRAM_CHAT_ID,
+                        text: message,
+                        parse_mode: 'Markdown',
+                        disable_notification: false
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.ok) {
+                    return { success: true, message: 'Сообщение успешно отправлено!' };
+                } else {
+                    return { 
+                        success: false, 
+                        message: `Ошибка Telegram API: ${data.description || 'Неизвестная ошибка'}` 
+                    };
+                }
+            } catch (error) {
+                console.error('Ошибка отправки в Telegram:', error);
+                return { 
+                    success: false, 
+                    message: `Ошибка сети: ${error.message}` 
+                };
+            }
+        }
+        
+        // Обработчик отправки формы
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Собираем данные формы
+            const formData = {
+                name: document.getElementById('name').value.trim(),
+                contact: document.getElementById('contact').value.trim(),
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value.trim(),
+                timestamp: new Date().toISOString()
+            };
+            
+            // Проверяем заполнение
+            if (!formData.name || !formData.contact || !formData.subject || !formData.message) {
+                showError('Пожалуйста, заполните все обязательные поля');
+                return;
+            }
+            
+            // Показываем загрузку
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Отправка...';
+            
+            // Скрываем предыдущие сообщения
+            hideMessages();
+            
+            try {
+                // Отправляем в Telegram
+                const result = await sendToTelegram(formData);
+                
+                if (result.success) {
+                    // Показываем успех
+                    showSuccess();
+                    
+                    // Очищаем форму
+                    contactForm.reset();
+                    
+                    // Сохраняем в localStorage (опционально)
+                    saveToLocalStorage(formData);
+                } else {
+                    // Показываем ошибку
+                    showError(result.message);
+                }
+            } catch (error) {
+                console.error('Ошибка обработки формы:', error);
+                showError('Произошла ошибка при отправке. Пожалуйста, попробуйте еще раз.');
+            } finally {
+                // Восстанавливаем кнопку
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fab fa-telegram"></i> Отправить в Telegram';
+            }
+        });
+        
+        // Функция показа успешного сообщения
+        function showSuccess() {
+            formSuccess.style.display = 'block';
+            formSuccess.classList.add('form-success');
+            
+            // Прячем через 5 секунд
+            setTimeout(() => {
+                formSuccess.style.display = 'none';
+            }, 5000);
+        }
+        
+        // Функция показа ошибки
+        function showError(message) {
+            errorText.textContent = message;
+            formError.style.display = 'block';
+            formError.classList.add('form-error');
+            
+            // Прячем через 5 секунд
+            setTimeout(() => {
+                formError.style.display = 'none';
+            }, 5000);
+        }
+        
+        // Функция скрытия всех сообщений
+        function hideMessages() {
+            formSuccess.style.display = 'none';
+            formError.style.display = 'none';
+        }
+        
+        // Сохранение в localStorage (для истории)
+        function saveToLocalStorage(formData) {
+            try {
+                // Получаем существующие сообщения
+                const messages = JSON.parse(localStorage.getItem('contactMessages') || '[]');
+                
+                // Добавляем новое сообщение
+                messages.push({
+                    ...formData,
+                    id: Date.now(),
+                    status: 'sent'
+                });
+                
+                // Сохраняем (максимум 50 сообщений)
+                if (messages.length > 50) {
+                    messages.shift(); // Удаляем самое старое
+                }
+                
+                localStorage.setItem('contactMessages', JSON.stringify(messages));
+            } catch (error) {
+                console.error('Ошибка сохранения в localStorage:', error);
+            }
+        }
+        
+        // Анимация появления элементов
+        document.addEventListener('DOMContentLoaded', function() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-slide-in');
+                    }
+                });
+            }, observerOptions);
+            
+            // Наблюдаем за всеми секциями
+            document.querySelectorAll('.contacts-content, .contact-form-section, .cta-section').forEach(section => {
+                observer.observe(section);
+            });
+        });
+        
+        // Валидация формы в реальном времени
+        document.querySelectorAll('.form-input, .form-textarea, .form-select').forEach(input => {
+            input.addEventListener('input', function() {
+                if (this.value.trim()) {
+                    this.style.borderColor = 'rgba(74, 158, 255, 0.5)';
+                } else {
+                    this.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

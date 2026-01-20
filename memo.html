@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Памятка - Научись и не ошибись</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* Специальные стили для страницы памятки */
+        
+        /* Вступление */
+        .memo-intro {
+            text-align: center;
+            padding: 40px 0;
+            margin-bottom: 40px;
+        }
+        
+        .intro-highlight {
+            background: linear-gradient(135deg, rgba(74, 158, 255, 0.1), rgba(42, 122, 255, 0.05));
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            border: 1px solid rgba(74, 158, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .intro-highlight::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, #4a9eff, #2a7aff);
+        }
+        
+        /* Преимущества */
+        .benefits-section {
+            margin: 60px 0;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        .benefit-card {
+            background: rgba(40, 40, 40, 0.6);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(74, 158, 255, 0.2);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .benefit-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #4a9eff, #2a7aff);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+            color: white;
+            box-shadow: 0 5px 15px rgba(74, 158, 255, 0.3);
+        }
+        
+        /* Содержание памятки */
+        .contents-section {
+            margin: 60px 0;
+        }
+        
+        .contents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        .content-card {
+            background: rgba(40, 40, 40, 0.6);
+            padding: 30px 25px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .content-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(74, 158, 255, 0.2);
+        }
+        
+        .content-icon {
+            font-size: 2.5rem;
+            color: #4a9eff;
+            margin-bottom: 20px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .content-tag {
+            display: inline-block;
+            background: rgba(74, 158, 255, 0.2);
+            color: #8bc6ff;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            margin-top: 15px;
+        }
+        
+        /* Доступ к памятке */
+        .access-section {
+            background: linear-gradient(135deg, rgba(20, 20, 20, 0.9), rgba(30, 30, 30, 0.9));
+            border-radius: 20px;
+            padding: 50px;
+            margin: 60px 0;
+            text-align: center;
+            border: 1px solid rgba(74, 158, 255, 0.2);
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .access-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(to right, transparent, #4a9eff, transparent);
+        }
+        
+        .access-icon {
+            font-size: 4rem;
+            color: #4a9eff;
+            margin-bottom: 25px;
+            filter: drop-shadow(0 0 10px rgba(74, 158, 255, 0.3));
+        }
+        
+        .access-description {
+            color: #ccc;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+        
+        .access-link-container {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 30px auto;
+            max-width: 900px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+        
+        .access-link-label {
+            color: #aaa;
+            margin-bottom: 15px;
+            display: block;
+            font-size: 1rem;
+        }
+        
+        .access-link {
+            color: #8bc6ff;
+            word-break: break-all;
+            font-size: 1rem;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            display: block;
+            margin-bottom: 20px;
+            border: 1px solid rgba(74, 158, 255, 0.1);
+        }
+        
+        .access-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 35px;
+            background: linear-gradient(135deg, #4a9eff, #2a7aff);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(42, 122, 255, 0.3);
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        
+        .access-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(42, 122, 255, 0.4);
+            background: linear-gradient(135deg, #5aa9ff, #3a8aff);
+        }
+        
+        .access-button:active {
+            transform: translateY(-1px);
+        }
+        
+        /* Советы */
+        .tips-section {
+            margin: 60px 0 30px;
+        }
+        
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        .tip-card {
+            background: rgba(40, 40, 40, 0.6);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .tip-card:hover {
+            border-color: rgba(74, 158, 255, 0.2);
+            transform: translateY(-5px);
+        }
+        
+        .tip-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(74, 158, 255, 0.05), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+            border-radius: 12px;
+        }
+        
+        .tip-card:hover::before {
+            opacity: 1;
+        }
+        
+        .tip-number {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 30px;
+            height: 30px;
+            background: rgba(74, 158, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #8bc6ff;
+            font-size: 0.9rem;
+        }
+        
+        .tip-icon {
+            font-size: 2.2rem;
+            color: #4a9eff;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+        
+        .tip-text {
+            color: #ccc;
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+        
+        /* Анимации */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .access-section {
+                padding: 30px 20px;
+            }
+            
+            .access-link {
+                font-size: 0.9rem;
+                padding: 12px;
+            }
+            
+            .access-button {
+                padding: 15px 25px;
+                font-size: 1rem;
+            }
+            
+            .benefit-card, .content-card, .tip-card {
+                padding: 25px 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .access-icon {
+                font-size: 3rem;
+            }
+            
+            .access-description {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="snow-canvas"></canvas>
+    <canvas id="mouse-trail"></canvas>
+    
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-scale-balanced"></i>
+                <h1>Научись и не ошибись</h1>
+            </div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Главная</a>
+                <a href="videos.html" class="nav-link"><i class="fas fa-video"></i> Обучающие видео</a>
+                <a href="memo.html" class="nav-link active"><i class="fas fa-file-alt"></i> Памятка</a>
+                <a href="contacts.html" class="nav-link"><i class="fas fa-address-book"></i> Контакты</a>
+                <a href="family.html" class="nav-link"><i class="fas fa-users"></i> VESPUCCI FAMQ</a>
+            </nav>
+            <button class="menu-toggle" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </header>
+
+        <main class="main-content">
+            <section class="page-header">
+                <h1><i class="fas fa-file-alt"></i> Памятка для работы</h1>
+                <p class="page-subtitle">Удобная и структурированная информация для эффективной работы в государственных структурах</p>
+            </section>
+
+            <section class="memo-content animate-fade-in">
+                <!-- Вступление -->
+                <div class="memo-intro">
+                    <p style="font-size: 1.2rem; line-height: 1.7; color: #ccc; max-width: 900px; margin: 0 auto 30px;">
+                        Работа в государственных структурах требует внимательности и знания множества правил. Чтобы не тратить время на долгие поиски информации, мы создали удобную и структурированную памятку.
+                    </p>
+                    
+                    <div class="intro-highlight">
+                        <i class="fas fa-bullseye" style="font-size: 2rem; color: #4a9eff; margin-bottom: 20px; display: block;"></i>
+                        <p style="font-size: 1.3rem; line-height: 1.6; color: #fff; font-weight: 500; margin: 0;">
+                            С памяткой работа становится прозрачнее, проще и организованнее. Это инструмент, который реально облегчает ежедневные задачи и поддерживает команду в любых ситуациях.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Преимущества -->
+                <div class="benefits-section">
+                    <h2 style="text-align: center; margin-bottom: 40px; color: #fff;">
+                        <i class="fas fa-check-double" style="color: #4a9eff; margin-right: 15px;"></i>
+                        Памятка поможет вам:
+                    </h2>
+                    
+                    <div class="benefits-grid">
+                        <div class="benefit-card">
+                            <div class="benefit-icon">
+                                <i class="fas fa-times-circle"></i>
+                            </div>
+                            <h3 style="color: #fff; margin-bottom: 15px;">Избежать ошибок</h3>
+                            <p style="color: #ccc; line-height: 1.6;">
+                                При выполнении повседневных задач и процедур. Правильные алгоритмы действий для любой ситуации.
+                            </p>
+                        </div>
+                        
+                        <div class="benefit-card">
+                            <div class="benefit-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <h3 style="color: #fff; margin-bottom: 15px;">Сэкономить время</h3>
+                            <p style="color: #ccc; line-height: 1.6;">
+                                Повысить эффективность и продуктивность работы. Вся необходимая информация в одном месте.
+                            </p>
+                        </div>
+                        
+                        <div class="benefit-card">
+                            <div class="benefit-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <h3 style="color: #fff; margin-bottom: 15px;">Быстро находить информацию</h3>
+                            <p style="color: #ccc; line-height: 1.6;">
+                                Нужные законы и кодексы штата всегда под рукой. Четкая структура для мгновенного доступа.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Содержание памятки -->
+                <div class="contents-section">
+                    <h2 style="text-align: center; margin-bottom: 40px; color: #fff;">
+                        <i class="fas fa-folder-open" style="color: #4a9eff; margin-right: 15px;"></i>
+                        Что вы найдете в памятке:
+                    </h2>
+                    
+                    <div class="contents-grid">
+                        <div class="content-card">
+                            <div class="content-icon">
+                                <i class="fas fa-gavel"></i>
+                            </div>
+                            <h3 style="color: #fff; margin-bottom: 15px; font-size: 1.3rem;">Уголовный кодекс</h3>
+                            <p style="color: #ccc; line-height: 1.6; margin-bottom: 15px;">
+                                Основные положения и статьи уголовного законодательства
+                            </p>
+                            <span class="content-tag">Обязательно к изучению</span>
+                        </div>
+                        
+                        <div class="content-card">
+                            <div class="content-icon">
+                                <i class="fas fa-balance-scale-left"></i>
+                            </div>
+                            <h3 style="color: #fff; margin-bottom: 15px; font-size: 1.3rem;">Процессуальный кодекс</h3>
+                            <p style="color: #ccc; line-height: 1.6; margin-bottom: 15px;">
+                                Процедурные нормы и правила ведения дел
+                            </p>
+                            <span class="content-tag">Важно для практики</span>
+                        </div>
+                        
+                        <div class="content-card">
+                            <div class="content-icon">
+                                <i class="fas fa-landmark"></i>
+                            </div>
+                            <h3 style="color: #fff; margin-bottom: 15px; font-size: 1.3rem;">Административный кодекс</h3>
+                            <p style="color: #ccc; line-height: 1.6; margin-bottom: 15px;">
+                                Нормы административного права и процедуры
+                            </p>
+                            <span class="content-tag">Повседневное применение</span>
+                        </div>
+                        
+                        <div class="content-card">
+                            <div class="content-icon">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <h3 style="color: #fff; margin-bottom: 15px; font-size: 1.3rem;">Ответы на типовые вопросы</h3>
+                            <p style="color: #ccc; line-height: 1.6; margin-bottom: 15px;">
+                                Типичные вопросы от адвокатов и правильные ответы на них
+                            </p>
+                            <span class="content-tag">Для общения с защитой</span>
+                        </div>
+                        
+                       
+                            <div class="content-icon">
+                     
+                            
+                            
+
+                        </div>
+                    </div>
+                </div>
+                <div>
+                <!-- Доступ к памятке -->
+                <div class="access-section animate-fade-in">
+                    <div class="access-icon">
+                        <i class="fas fa-external-link-alt"></i>
+                    </div>
+                    
+                    <h2 style="color: #fff; margin-bottom: 20px; font-size: 2rem;">Доступ к памятке</h2>
+                    
+                    <p class="access-description">
+                        Памятка доступна в виде структурированного документа Google Sheets, который постоянно обновляется и дополняется.
+                    </p>
+                    
+                    <div class="access-link-container">
+                        <span class="access-link-label">
+                            <i class="fas fa-link" style="margin-right: 8px;"></i>
+                            Ссылка на памятку:
+                        </span>
+                        
+                        <div class="access-link">
+                            https://docs.google.com/spreadsheets/d/1164ML8QypY4hgzhcly3oYMdaJrUiXE9OqPA2HDJ316k/edit
+                        </div>
+                        
+                        <button class="access-button" id="open-memo-btn">
+                            <i class="fas fa-external-link-alt"></i>
+                            Открыть памятку
+                        </button>
+                        
+                        <p style="color: #888; margin-top: 20px; font-size: 0.9rem;">
+                            <i class="fas fa-lock" style="margin-right: 8px;"></i>
+                            Документ открывается в новой вкладке браузера
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Советы по использованию -->
+                <div class="tips-section">
+                    <h2 style="text-align: center; margin-bottom: 40px; color: #fff;">
+                        <i class="fas fa-lightbulb" style="color: #4a9eff; margin-right: 15px;"></i>
+                        Советы по использованию:
+                    </h2>
+                    
+                    <div class="tips-grid">
+                        <div class="tip-card">
+                            <div class="tip-number">1</div>
+                            <div class="tip-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <p class="tip-text">
+                                Используйте поиск по документу (Ctrl+F) для быстрого нахождения нужного раздела
+                            </p>
+                        </div>
+                        
+                  
+                        
+                        <div class="tip-card">
+                            <div class="tip-number">2</div>
+                            <div class="tip-icon">
+                                <i class="fas fa-book-open"></i>
+                            </div>
+                            <p class="tip-text">
+                                Ознакомьтесь с содержанием перед началом работы для лучшего понимания
+                            </p>
+                        </div>
+                        
+                        <div class="tip-card">
+                            <div class="tip-number">3</div>
+                            <div class="tip-icon">
+                                <i class="fas fa-comment-alt"></i>
+                            </div>
+                            <p class="tip-text">
+                                Предложения по улучшению памятки можно отправлять через страницу "Контакты"
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>© 2026 Научись и не ошибись. Все права защищены.</p>
+            <p>Информационный ресурс по юридическим вопросам</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-discord"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fas fa-envelope"></i></a>
+            </div>
+        </footer>
+    </div>
+
+    <script src="js/effects.js"></script>
+    <script>
+        // Мобильное меню
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            document.querySelector('.nav').classList.toggle('show');
+        });
+        
+        // Открытие памятки по кнопке
+        document.getElementById('open-memo-btn').addEventListener('click', function() {
+            const url = 'https://docs.google.com/spreadsheets/d/1164ML8QypY4hgzhcly3oYMdaJrUiXE9OqPA2HDJ316k/edit';
+            
+            // Создаем эффект нажатия кнопки
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = 'translateY(-3px)';
+            }, 150);
+            
+            // Показываем сообщение об открытии
+            const originalText = this.innerHTML;
+            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Открывается...';
+            this.disabled = true;
+            
+            setTimeout(() => {
+                // Открываем ссылку в новой вкладке
+                window.open(url, '_blank');
+                
+                // Восстанавливаем кнопку
+                this.innerHTML = originalText;
+                this.disabled = false;
+            }, 800);
+        });
+        
+        // Копирование ссылки при клике на саму ссылку
+        document.querySelector('.access-link').addEventListener('click', function() {
+            const url = this.textContent;
+            
+            navigator.clipboard.writeText(url)
+                .then(() => {
+                    // Показываем временное сообщение
+                    const originalText = this.textContent;
+                    this.textContent = 'Ссылка скопирована!';
+                    this.style.color = '#34ce57';
+                    
+                    setTimeout(() => {
+                        this.textContent = originalText;
+                        this.style.color = '#8bc6ff';
+                    }, 2000);
+                })
+                .catch(err => {
+                    console.error('Ошибка копирования: ', err);
+                    this.textContent = 'Не удалось скопировать';
+                    this.style.color = '#ff6b6b';
+                    
+                    setTimeout(() => {
+                        this.textContent = url;
+                        this.style.color = '#8bc6ff';
+                    }, 2000);
+                });
+        });
+        
+        // Плавная анимация появления элементов при скролле
+        document.addEventListener('DOMContentLoaded', function() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-fade-in');
+                    }
+                });
+            }, observerOptions);
+            
+            // Наблюдаем за всеми секциями
+            document.querySelectorAll('.benefits-section, .contents-section, .access-section, .tips-section').forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>

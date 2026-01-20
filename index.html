@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная - Научись и не ошибись</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <canvas id="snow-canvas"></canvas>
+    <canvas id="mouse-trail"></canvas>
+    
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-scale-balanced"></i>
+                <h1>Научись и не ошибись</h1>
+            </div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link active"><i class="fas fa-home"></i> Главная</a>
+                <a href="videos.html" class="nav-link"><i class="fas fa-video"></i> Обучающие видео</a>
+                <a href="memo.html" class="nav-link"><i class="fas fa-file-alt"></i> Памятка</a>
+                <a href="contacts.html" class="nav-link"><i class="fas fa-address-book"></i> Контакты</a>
+                <a href="family.html" class="nav-link"><i class="fas fa-users"></i> VESPUCCI FAMQ</a>
+            </nav>
+            <button class="menu-toggle" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </header>
+
+        <main class="main-content">
+            <section class="hero">
+                <div class="hero-content">
+                    <h2>Добро пожаловать на информационный ресурс</h2>
+                    <p class="subtitle">Создан для тех, кто хочет разбираться в законах, действовать уверенно и избегать ошибок.</p>
+                    <div class="cta-buttons">
+                        <a href="#about" class="btn btn-primary">Узнать больше</a>
+                        <a href="memo.html" class="btn btn-secondary">Смотреть памятку</a>
+                    </div>
+                </div>
+                <div class="hero-decoration">
+                    <div class="decoration-circle"></div>
+                    <div class="decoration-circle"></div>
+                    <div class="decoration-circle"></div>
+                </div>
+            </section>
+
+            <section class="about" id="about">
+                <h2><i class="fas fa-graduation-cap"></i> О проекте</h2>
+                <div class="about-grid">
+                    <div class="about-card">
+                        <div class="about-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h3>Запечатление новых моментов</h3>
+                        <p>С полученными знаниями вы сможете глубже понимать свои действия, принимать обоснованные решения и чувствовать уверенность в любой ситуации.</p>
+                    </div>
+                    
+                    <div class="about-card">
+                        <div class="about-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3>Знания, которые действительно помогают</h3>
+                        <p>Мы собрали и структурировали информацию так, чтобы она была максимально полезной, понятной и применимой на практике.</p>
+                    </div>
+                    
+                    <div class="about-card">
+                        <div class="about-icon">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <h3>Важное — всегда под рукой</h3>
+                        <p>Наш сайт создан так, чтобы все ключевые данные, инструкции и подсказки всегда были под рукой — без лишних поисков и сложностей.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="features">
+                <h2><br></br><i class="fas fa-star"></i> Что вы найдете на сайте</h2>
+                <ul class="features-list">
+                    <li><i class="fas fa-check-circle"></i> Понятные объяснения сложных юридических норм</li>
+                    <li><i class="fas fa-check-circle"></i> Доступ к актуальной информации о законах</li>
+                    <li><i class="fas fa-check-circle"></i> Рекомендации по общению с адвокатом</li>
+                    <li><i class="fas fa-check-circle"></i> Примеры реальных ситуаций и правильных формулировок</li>
+                    <li><i class="fas fa-check-circle"></i> Экономия времени — не нужно тратить часы на поиск информации</li>
+                    <li><i class="fas fa-check-circle"></i> Удобство — всё структурировано и доступно в пару кликов</li>
+                </ul>
+                
+                <div class="quote">
+                    <i class=""></i>
+                    <p>Мы создали этот ресурс, чтобы сделать юридические знания доступными каждому. Теперь важная информация всегда рядом — в удобной и понятной форме.</p>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>© 2026 Научись и не ошибись. Все права защищены.</p>
+            <p>Информационный ресурс по юридическим вопросам</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-discord"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fas fa-envelope"></i></a>
+            </div>
+        </footer>
+    </div>
+
+    <script src="js/effects.js"></script>
+    <script>
+        // Мобильное меню
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            document.querySelector('.nav').classList.toggle('show');
+        });
+        
+        // Подсветка активной страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = window.location.pathname.split('/').pop();
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                const linkPage = link.getAttribute('href');
+                if (linkPage === currentPage || (currentPage === '' && linkPage === 'index.html')) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

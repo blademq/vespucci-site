@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Обучающие видео - Научись и не ошибись</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* Специальные стили для страницы видео - АЛЬТЕРНАТИВНЫЙ ВАРИАНТ */
+        
+        /* Основной контейнер видео */
+        .video-main-container {
+            margin: 40px 0 60px;
+        }
+        
+        /* Контейнер для превью видео */
+        .video-preview-container {
+            position: relative;
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: #000;
+        }
+        
+        .video-preview {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 соотношение сторон */
+            height: 0;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
+        }
+        
+        .video-preview-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            text-align: center;
+            color: white;
+            cursor: pointer;
+        }
+        
+        .preview-icon {
+            font-size: 5rem;
+            color: #4a9eff;
+            margin-bottom: 25px;
+            filter: drop-shadow(0 0 15px rgba(74, 158, 255, 0.3));
+            transition: all 0.3s;
+        }
+        
+        .video-preview-container:hover .preview-icon {
+            transform: scale(1.1);
+            color: #2a7aff;
+        }
+        
+        .preview-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+        
+        .preview-subtitle {
+            color: #aaa;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+        
+        .play-button {
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #4a9eff, #2a7aff);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(74, 158, 255, 0.3);
+        }
+        
+        .play-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(74, 158, 255, 0.4);
+            background: linear-gradient(135deg, #5aa9ff, #3a8aff);
+        }
+        
+        .preview-note {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 25px;
+            font-style: italic;
+        }
+        
+        /* Информация о видео */
+        .video-info-panel {
+            background: rgba(30, 30, 30, 0.7);
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+            border: 1px solid rgba(74, 158, 255, 0.2);
+        }
+        
+        .video-title-large {
+            color: #fff;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .video-badge {
+            background: linear-gradient(135deg, #4a9eff, #2a7aff);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 1rem;
+            display: inline-block;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(74, 158, 255, 0.2);
+        }
+        
+        .video-description {
+            color: #ccc;
+            line-height: 1.7;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+        
+        .video-details {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            color: #ddd;
+        }
+        
+        .detail-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .detail-icon {
+            color: #4a9eff;
+            font-size: 1.2rem;
+            width: 30px;
+        }
+        
+        .video-url-box {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 30px 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .url-label {
+            color: #8bc6ff;
+            margin-bottom: 10px;
+            display: block;
+            font-size: 1rem;
+        }
+        
+        .url-value {
+            color: #fff;
+            word-break: break-all;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .video-actions {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+        
+        .video-btn {
+            padding: 14px 30px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .video-btn-primary {
+            background: linear-gradient(135deg, #4a9eff, #2a7aff);
+            color: white;
+            box-shadow: 0 4px 15px rgba(74, 158, 255, 0.3);
+        }
+        
+        .video-btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(74, 158, 255, 0.4);
+        }
+        
+        .video-btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .video-btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-3px);
+        }
+        
+        /* Контент видео */
+        .video-content-section {
+            margin: 60px 0;
+        }
+        
+        .content-card {
+            background: linear-gradient(145deg, rgba(30, 30, 30, 0.9), rgba(20, 20, 20, 0.9));
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(74, 158, 255, 0.1);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        }
+        
+        .section-title {
+            color: #fff;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .section-title i {
+            color: #4a9eff;
+        }
+        
+        .content-text {
+            color: #ddd;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+        
+        .benefits-list {
+            list-style: none;
+            margin: 30px 0;
+        }
+        
+        .benefit-item {
+            padding: 18px 0;
+            padding-left: 50px;
+            position: relative;
+            color: #f0f0f0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 1.05rem;
+        }
+        
+        .benefit-item:last-child {
+            border-bottom: none;
+        }
+        
+        .benefit-item::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(135deg, #4a9eff, #2a7aff);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .highlight-box {
+            background: rgba(74, 158, 255, 0.15);
+            border: 1px solid rgba(74, 158, 255, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 35px 0;
+            border-left: 4px solid #4a9eff;
+        }
+        
+        /* Похожие материалы */
+        .related-materials {
+            margin: 70px 0 40px;
+        }
+        
+        .materials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        .material-card {
+            background: rgba(35, 35, 35, 0.8);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s;
+        }
+        
+        .material-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(74, 158, 255, 0.4);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+        
+        .card-thumbnail {
+            height: 160px;
+            background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .card-thumbnail i {
+            font-size: 3rem;
+            color: #4a9eff;
+            transition: transform 0.3s;
+        }
+        
+        .material-card:hover .card-thumbnail i {
+            transform: scale(1.2);
+        }
+        
+        .card-content {
+            padding: 25px;
+        }
+        
+        .card-title {
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        
+        .card-description {
+            color: #bbb;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .card-tag {
+            display: inline-block;
+            background: rgba(74, 158, 255, 0.2);
+            color: #8bc6ff;
+            padding: 6px 15px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        /* Анимации */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+        
+        /* Мобильная адаптация */
+        @media (max-width: 768px) {
+            .video-preview-content {
+                padding: 30px 20px;
+            }
+            
+            .preview-icon {
+                font-size: 4rem;
+            }
+            
+            .preview-title {
+                font-size: 1.5rem;
+            }
+            
+            .video-info-panel {
+                padding: 25px 20px;
+            }
+            
+            .video-title-large {
+                font-size: 1.5rem;
+            }
+            
+            .video-actions {
+                flex-direction: column;
+            }
+            
+            .video-btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .materials-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .content-card {
+                padding: 30px 25px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .preview-title {
+                font-size: 1.3rem;
+            }
+            
+            .preview-subtitle {
+                font-size: 1rem;
+            }
+            
+            .play-button {
+                padding: 12px 30px;
+                font-size: 1rem;
+            }
+            
+            .benefit-item {
+                padding-left: 40px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="snow-canvas"></canvas>
+    <canvas id="mouse-trail"></canvas>
+    
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-scale-balanced"></i>
+                <h1>Научись и не ошибись</h1>
+            </div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Главная</a>
+                <a href="videos.html" class="nav-link active"><i class="fas fa-video"></i> Обучающие видео</a>
+                <a href="memo.html" class="nav-link"><i class="fas fa-file-alt"></i> Памятка</a>
+                <a href="contacts.html" class="nav-link"><i class="fas fa-address-book"></i> Контакты</a>
+                <a href="family.html" class="nav-link"><i class="fas fa-users"></i> VESPUCCI FAMQ</a>
+            </nav>
+            <button class="menu-toggle" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </header>
+
+        <main class="main-content">
+            <section class="page-header">
+                <h1><i class="fas fa-video"></i> Обучающие видео</h1>
+                <p class="page-subtitle">Практические видеоуроки для уверенных действий в различных ситуациях</p>
+            </section>
+
+            <!-- Основное видео - АЛЬТЕРНАТИВНЫЙ ВАРИАНТ -->
+            <section class="video-main-container animate-fade-in">
+                <div class="video-preview-container">
+                    <div class="video-preview">
+                        <div class="video-preview-content" id="video-preview">
+                            <div class="preview-icon">
+                                <i class="fas fa-play-circle"></i>
+                            </div>
+                            <h2 class="preview-title">Обучающее видео по задержанию на GTA5 RP VESPUCCI</h2>
+                            <p class="preview-subtitle">
+                                Нажмите кнопку ниже, чтобы посмотреть обучающее видео на YouTube
+                            </p>
+                            <button class="play-button" id="watch-video-btn">
+                                <i class="fab fa-youtube"></i> Смотреть видео на YouTube
+                            </button>
+                            <p class="preview-note">
+                                Видео откроется в новой вкладке на YouTube
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Информация о видео -->
+                <div class="video-info-panel">
+                    <h2 class="video-title-large">Обучающее видео по задержанию на GTA5 RP VESPUCCI</h2>
+                    
+                    <span class="video-badge">
+                        <i class="fas fa-star"></i> Рекомендуется к просмотру
+                    </span>
+                    
+                    <p class="video-description">
+                        Задержания в RP-ситуациях требуют не только знания правил сервера, но и чётких, грамотных действий от игрока. 
+                        Это видео поможет вам уверенно и корректно проводить задержания в GTA5 RP VESPUCCI.
+                    </p>
+                    
+                    <div class="video-details">
+                        <div class="detail-item">
+                            <i class="fas fa-clock detail-icon"></i>
+                            <span><strong>Длительность:</strong> 15 минут 08 секунд</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-eye detail-icon"></i>
+                            <span><strong>Просмотров:</strong> 1,4 тыс просмотров</span>
+                        </div>
+                        <div class="detail-item">                                  <div class="detail-item">
+                            <i class="fas fa-graduation-cap detail-icon"></i>
+                            <span><strong>Уровень сложности:</strong> Подходит для всех уровней</span>
+                        </div>
+                    </div>
+                    
+                    <div class="video-url-box">
+                        <span class="url-label">
+                            <i class="fas fa-link"></i> Прямая ссылка на видео:
+                        </span>
+                        <div class="url-value">https://www.youtube.com/watch?v=0ioTydwjxsI</div>
+                    </div>
+                    
+                    <div class="video-actions">
+                        <button class="video-btn video-btn-primary" id="open-video-btn">
+                            <i class="fab fa-youtube"></i> Открыть видео на YouTube
+                        </button>
+                        <button class="video-btn video-btn-secondary" id="copy-video-url">
+                            <i class="fas fa-copy"></i> Копировать ссылку
+                        </button>
+                        <button class="video-btn video-btn-secondary" id="open-with-timestamp">
+                            <i class="fas fa-play"></i> Начать с 1-й секунды
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Контент видео -->
+            <section class="video-content-section animate-fade-in">
+                <div class="content-card">
+                    <h2 class="section-title">
+                        <i class="fas fa-graduation-cap"></i>
+                        Что вы узнаете из этого видео?
+                    </h2>
+                    
+                    <p class="content-text">
+                        В этом обучающем видео мы подробно разбираем процесс задержания в ролевой игре, уделяя внимание как техническим аспектам, 
+                        так и правильному ролевому взаимодействию.
+                    </p>
+                    
+                    <ul class="benefits-list">
+                        <li class="benefit-item">Как грамотно подойти к задержанию, соблюдая RP-процесс</li>
+                        <li class="benefit-item">Как вести диалог с задержанным, сохраняя атмосферу ролевой игры</li>
+                        <li class="benefit-item">Типичные ошибки при задержаниях и способы их избежать</li>
+                        <li class="benefit-item">Какие действия использовать в различных ситуациях</li>
+                    </ul>
+                    
+                    <p class="content-text">
+                        Это видео будет полезно как новичкам, так и опытным игрокам, которые хотят повысить качество своей игры 
+                        и сделать RP более реалистичным и интересным.
+                    </p>
+                    
+                    <div class="highlight-box">
+                        <h3 style="color: #fff; margin-bottom: 15px;">
+                            <i class="fas fa-exclamation-circle" style="color: #4a9eff; margin-right: 10px;"></i>
+                            Почему это видео важно?
+                        </h3>
+                        <p style="color: #ddd; line-height: 1.7; margin-bottom: 10px;">
+                            Работа в государственных структурах связана с большим количеством правил, процедур и нюансов. 
+                            Чтобы быстрее разобраться в процессах и действовать правильно, мы подготовили этот обучающий материал.
+                        </p>
+                        <p style="color: #8bc6ff; font-weight: 600; margin: 0;">
+                            Задержание — это ответственность. С помощью видео работа становится понятнее и удобнее.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+ 
+        </main>
+
+        <footer class="footer">
+            <p>© 2026 Научись и не ошибись. Все права защищены.</p>
+            <p>Информационный ресурс по юридическим вопросам</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-discord"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fas fa-envelope"></i></a>
+            </div>
+        </footer>
+    </div>
+
+    <script src="js/effects.js"></script>
+    <script>
+        // Мобильное меню
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            document.querySelector('.nav').classList.toggle('show');
+        });
+        
+        // Ссылка на видео
+        const VIDEO_URL = 'https://www.youtube.com/watch?v=0ioTydwjxsI';
+        const VIDEO_URL_WITH_TIMESTAMP = 'https://www.youtube.com/watch?v=0ioTydwjxsI&t=1s';
+        
+        // Элементы страницы
+        const watchVideoBtn = document.getElementById('watch-video-btn');
+        const openVideoBtn = document.getElementById('open-video-btn');
+        const copyVideoUrlBtn = document.getElementById('copy-video-url');
+        const openWithTimestampBtn = document.getElementById('open-with-timestamp');
+        const videoPreview = document.getElementById('video-preview');
+        
+        // Открыть видео на YouTube
+        function openVideoOnYouTube(url) {
+            window.open(url, '_blank', 'noopener,noreferrer');
+        }
+        
+        // Копировать ссылку на видео
+        function copyVideoUrl(url, button) {
+            navigator.clipboard.writeText(url)
+                .then(() => {
+                    showSuccessMessage(button, 'Скопировано!');
+                })
+                .catch(err => {
+                    console.error('Ошибка копирования:', err);
+                    // Резервный метод для старых браузеров
+                    copyWithFallback(url, button);
+                });
+        }
+        
+        // Резервный метод копирования
+        function copyWithFallback(text, button) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.left = '-999999px';
+            textArea.style.top = '-999999px';
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    showSuccessMessage(button, 'Скопировано!');
+                } else {
+                    showErrorMessage(button, 'Ошибка копирования');
+                }
+            } catch (err) {
+                console.error('Не удалось скопировать текст:', err);
+                showErrorMessage(button, 'Ошибка копирования');
+            }
+            
+            document.body.removeChild(textArea);
+        }
+        
+        // Показать сообщение об успехе
+        function showSuccessMessage(button, message) {
+            const originalText = button.innerHTML;
+            button.innerHTML = `<i class="fas fa-check"></i> ${message}`;
+            button.style.background = 'rgba(40, 167, 69, 0.2)';
+            button.style.color = '#34ce57';
+            button.style.borderColor = '#28a745';
+            
+            setTimeout(() => {
+                button.innerHTML = originalText;
+                button.style.background = '';
+                button.style.color = '';
+                button.style.borderColor = '';
+            }, 2000);
+        }
+        
+        // Показать сообщение об ошибке
+        function showErrorMessage(button, message) {
+            const originalText = button.innerHTML;
+            button.innerHTML = `<i class="fas fa-times"></i> ${message}`;
+            button.style.background = 'rgba(220, 53, 69, 0.2)';
+            button.style.color = '#e4606d';
+            button.style.borderColor = '#dc3545';
+            
+            setTimeout(() => {
+                button.innerHTML = originalText;
+                button.style.background = '';
+                button.style.color = '';
+                button.style.borderColor = '';
+            }, 2000);
+        }
+        
+        // Обработчики событий
+        watchVideoBtn.addEventListener('click', () => openVideoOnYouTube(VIDEO_URL));
+        openVideoBtn.addEventListener('click', () => openVideoOnYouTube(VIDEO_URL));
+        
+        copyVideoUrlBtn.addEventListener('click', function() {
+            copyVideoUrl(VIDEO_URL, this);
+        });
+        
+        openWithTimestampBtn.addEventListener('click', function() {
+            openVideoOnYouTube(VIDEO_URL_WITH_TIMESTAMP);
+            showSuccessMessage(this, 'Открывается с 1-й секунды');
+        });
+        
+        // Клик по превью видео
+        videoPreview.addEventListener('click', () => openVideoOnYouTube(VIDEO_URL));
+        
+        // Карточки других материалов
+        document.querySelectorAll('.material-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // Эффект нажатия
+                this.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    this.style.transform = 'translateY(-8px)';
+                }, 150);
+                
+                // В реальном проекте здесь будет переход к материалу
+                const title = this.querySelector('.card-title').textContent;
+                alert(`В реальном проекте здесь будет открыт материал: "${title}"`);
+            });
+        });
+        
+        // Анимация появления элементов
+        document.addEventListener('DOMContentLoaded', function() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-fade-in');
+                    }
+                });
+            }, observerOptions);
+            
+            // Наблюдаем за всеми секциями
+            document.querySelectorAll('.video-main-container, .video-content-section, .related-materials').forEach(section => {
+                observer.observe(section);
+            });
+        });
+        
+        // Добавляем информацию в консоль для разработчиков
+        console.log('Видео доступно по ссылке:', VIDEO_URL);
+        console.log('Если видео не встраивается, значит владелец ограничил встраивание.');
+    </script>
+</body>
+</html>
